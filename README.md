@@ -25,11 +25,7 @@ May be installed with `pip install -r requirements.txt`.
 3. Populate cards, sinks and sources. AutoAudio can help you do this, see below.
 4. Save the config and call AutoAudio (e.g. with mapped keyboard shortcuts) when you need it.
 
-I personally have -
-`autoaudio --load-profile music`
-Mapped to one global system shortcut, and -
-`autoaudio --load-profile calls`
-mapped to another.
+I personally have `autoaudio --load-profile music` mapped to one global system shortcut, and `autoaudio --load-profile calls` mapped to another.
 
 ## Semi-Automatic Configuration
 
