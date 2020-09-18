@@ -105,9 +105,14 @@ def capture_current_config(pulse):
         print("Including the default source in the capture")
         config['profile_name'][0]['rule_name'].append({'set_default_source': default_source.name})
     else:
-        print(f"Note: the default source ('{default_source.name}') is not included in the capture because it seems to belong to "
-              "a different card than your default sink's card.")
+        print(f"The default source ('{default_source.name}') is not included in the capture because it seems to belong to "
+              "a different card than your default sink.")
+        print("This is normal if you're capturing an output-only profile, otherwise you may want to add a set_default_sink entry.")
+    print("Here's your snippet to put in ~/.config/autoaudio.yaml:")
+    print("---")
     print(yaml.dump(config))
+    print("---")
+    print("Note: YAML is very sensitive to indentation, so be careful when copying.")
 
 
 def notify(rule_succeeded, failure_reason, rule_name, rule_config, profile_name):
