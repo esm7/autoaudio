@@ -110,6 +110,18 @@ def capture_current_config(pulse):
     print(yaml.dump(config))
 
 
+def notify(rule_succeeded, failure_reason, rule_name, rule_config, profile_name):
+    if config.get('general'):
+        notifier = config['general'].get('notifier')
+        if notifier is not None:
+            if rule_succeeded:
+                message = f"Audio profile rule '{rule_name}' succeeded"
+            else:
+                message = f"Could not match any rule in profile '{profile_name}'"
+            os.system(f"{notifier} -u {'low' if rule_succeeded else 'critical'} "
+                      f'AutoAudio "{message}"')
+
+
 with pulsectl.Pulse('autoaudio') as pulse:
     if args.load_profile is not None:
         print(f"Loading profile {args.load_profile}")
@@ -124,6 +136,7 @@ with pulsectl.Pulse('autoaudio') as pulse:
                 if rule_succeeded:
                     print("Seems like we're done :)")
                     break
+            notify(rule_succeeded, failure_reason, rule_name, rule_config, args.load_profile)
         else:
             print(f"Profile {args.load_profile} can't be found in the configuration file.")
             if config.get('profiles') is not None:
