@@ -115,7 +115,7 @@ def notify(rule_succeeded, failure_reason, rule_name, rule_config, profile_name)
         notifier = config['general'].get('notifier')
         if notifier is not None:
             if rule_succeeded:
-                message = f"Audio profile rule '{rule_name}' succeeded"
+                message = f"Profile '{profile_name}' succeeded with '{rule_name}'"
             else:
                 message = f"Could not match any rule in profile '{profile_name}'"
             os.system(f"{notifier} -u {'low' if rule_succeeded else 'critical'} "
